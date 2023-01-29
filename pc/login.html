@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE>标准用户登录系统</TITLE>
+  <center>
+  <h1>标准用户登录系统</h1>
+  <h3>默认用户名:user 默认密码:123</h3>
+  </center>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <!--导入jquery库-->
+  <script src='jquery.js'></script>
+  <script>
+		//页面加载时 让id为uid的对象获得焦点
+		$(document).ready(function(){
+			//var oInput = $("#uid");
+			//oInput.focus();//获得焦点
+			// dom对象与jquery对象之间转换  原生js抓取和生成的对象称为dom对象，通过jquery创建和抓取的对象称为jquery对象，只有jquery对象可以调用jquery中方法
+			//var oInput = document.getElementById("uid");
+			//var oInput = $("#uid");
+			//将dom对象转为jquery对象(穿马甲)
+			//oInput = $(oInput);
+			//console.log(oInput.val());
+
+			//将jquery对象转为dom对象
+			//oInput = oInput[0];
+			//console.log(oInput.value);
+
+			var oInput = $("#uid");
+			oInput.focus();
+		});
+
+		function check()
+		{
+			//得到uid的值
+			var uid = $("#uid").val();
+			if(uid == "")
+			{
+				alert("用户ID必须填写!");
+				$("#uid").focus();
+				return ;
+			}
+			else
+			{
+				//校验密码是否为三位数字
+				var reg = new RegExp("^\\d{3}$");
+				var flag = reg.test($("#upass").val());
+				if(flag==false)
+				{
+					alert("密码必须是3位数字");
+					$("#upass").focus().select();
+				}
+				else
+				{
+					//提交表达
+					$("#thisform").attr({action:"main.html",method:"post"}).submit();
+				}
+			}
+		}	
+  </script>
+ </HEAD>
+
+ <BODY>
+	<form id='thisform'>
+		<TABLE border='1px' width='500px' align='center'>
+		<TR>
+			<TD>用户ID:</TD>
+			<TD><input  id='uid' /></TD>
+		</TR>
+		<TR>
+			<TD>用户密码:</TD>
+			<TD><input id='upass' /></TD>
+		</TR>
+		<TR>
+			<TD colspan='2' align='center'>
+				<input type='button' value="登录" onclick='check()'/>
+			</TD>
+			
+		</TR>
+		</TABLE>
+	</form>
+ </BODY>
+</HTML>
+
